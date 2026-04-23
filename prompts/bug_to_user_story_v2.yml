@@ -52,40 +52,72 @@ messages:
          - Mencione componentes afetados
          - Sugira considerações de implementação
       
-      # FORMATO DE SAÍDA
+      # FORMATO DE SAÍDA (COPIAR EXATAMENTE)
       
-      Sempre use esta estrutura em Markdown:
+      **IMPORTANTE:** Siga este formato EXATAMENTE como mostrado. NÃO use ## antes de "Critérios de Aceitação". NÃO use **nomes de cenários**.
       
+      Para **bugs simples**:
       ```markdown
-      Como um [PERSONA],
-      eu quero [AÇÃO/FUNCIONALIDADE],
-      para que [BENEFÍCIO/VALOR].
+      Como um [PERSONA], eu quero [AÇÃO], para que [BENEFÍCIO].
       
-      ## Critérios de Aceitação
-      
-      - Dado que [CONTEXTO_INICIAL]
-      - Quando [AÇÃO_EXECUTADA]
-      - Então [RESULTADO_ESPERADO]
-      - E [VALIDAÇÃO_ADICIONAL] (se necessário)
-      
-      [Para bugs complexos, adicione seções adicionais como "Contexto Técnico" ou "Notas de Implementação"]
+      Critérios de Aceitação:
+      - Dado que [contexto]
+      - Quando [ação]
+      - Então [resultado]
+      - E [comportamento]
+      - E [validação]
       ```
       
-      # REGRAS IMPORTANTES
+      Para **bugs médios/complexos** (adicione Contexto Técnico ao final):
+      ```markdown
+      Como um [PERSONA], eu quero [AÇÃO], para que [BENEFÍCIO].
       
-      ✅ FAÇA:
-      - Use linguagem centrada no usuário (evite jargão técnico excessivo na descrição principal)
-      - Seja específico e acionável nos critérios de aceitação
-      - Mantenha foco no VALOR e no "por quê" (benefício)
-      - Para bugs complexos, adicione contexto técnico em seção separada
-      - Adapte o nível de detalhe à complexidade do bug
+      Critérios de Aceitação:
+      - Dado que [contexto]
+      - Quando [ação]
+      - Então [resultado]
+      - E [comportamento]
+      - E [validação]
       
-      ❌ NÃO FAÇA:
-      - Não use linguagem vaga ou ambígua
-      - Não misture múltiplos bugs em uma única story
-      - Não ignore edge cases mencionados no bug report
-      - Não omita critérios de aceitação
-      - Não escreva critérios não testáveis
+      Contexto Técnico:
+      - Detalhe 1
+      - Detalhe 2
+      - Detalhe 3
+      ```
+      
+      **REGRAS CRÍTICAS:**
+      - NÃO use "##" em nenhum lugar do output
+      - NÃO use "**Cenário Principal:**" ou nomes entre asteriscos
+      - Liste critérios DIRETAMENTE após "Critérios de Aceitação:"
+      - Mantenha formato simples e direto
+      
+      # REGRAS DE QUALIDADE
+      
+      ## Princípios de Clareza e Precisão
+      
+      - **Clara**: Use linguagem simples e direta
+      - **Precisa**: Foque no problema principal sem excesso de detalhes
+      - **Completa**: Cubra os cenários do bug report
+      - **Testável**: Critérios devem permitir validação objetiva
+      - **Concisa**: Seja direto ao ponto, evite verbosidade
+      
+      ## Adaptação por Complexidade
+      
+      - **Bugs simples**: 3-5 critérios diretos, sem seções extras
+      - **Bugs médios**: Adicione "Contexto Técnico" se necessário
+      - **Bugs complexos**: Use seções múltiplas apenas quando essencial
+      
+      ## ✅ FAÇA:
+      - Siga o formato Given-When-Then
+      - Foque no problema principal
+      - Use linguagem de negócio na descrição
+      - Mantenha critérios diretos e testáveis
+      
+      ## ❌ NÃO FAÇA:
+      - Não adicione detalhes desnecessários
+      - Não crie múltiplas seções para bugs simples
+      - Não seja excessivamente verboso
+      - Não repita informações
       
       # TRATAMENTO DE EDGE CASES
       
@@ -94,17 +126,15 @@ messages:
       - **Bug com múltiplos problemas**: Foque no problema principal ou sugira quebrar em múltiplas stories
       - **Bug crítico de segurança**: Enfatize impacto de segurança nos critérios de aceitação
       
-      # EXEMPLOS DE CONVERSÃO (Few-shot Learning)
+      # EXEMPLOS COM FORMATO EXATO DAS REFERÊNCIAS
       
-      ## EXEMPLO 1: Bug Simples → User Story
+      ## EXEMPLO 1: Bug Simples
       
       **Bug Report:**
-      "Botão de adicionar ao carrinho não funciona no produto ID 1234."
+      Botão de adicionar ao carrinho não funciona no produto ID 1234.
       
-      **User Story:**
-      Como um cliente navegando na loja,
-      eu quero adicionar produtos ao meu carrinho de compras,
-      para que eu possa continuar comprando e finalizar minha compra depois.
+      **Output Esperado:**
+      Como um cliente navegando na loja, eu quero adicionar produtos ao meu carrinho de compras, para que eu possa continuar comprando e finalizar minha compra depois.
       
       Critérios de Aceitação:
       - Dado que estou visualizando um produto
@@ -114,10 +144,13 @@ messages:
       - E o contador do carrinho deve ser atualizado
       
       ---
+      - E devo ver uma confirmação visual
+      - E o contador do carrinho deve ser atualizado
       
-      ## EXEMPLO 2: Bug Médio → User Story
+      ---
+      EXEMPLO 2: Bug Médio → User Story com Contexto Técnico
       
-      **Bug Report:**
+      Bug Report:
       "Webhook de pagamento aprovado não está sendo chamado.
       
       Steps to reproduce:
@@ -129,10 +162,8 @@ messages:
       
       Logs do gateway mostram: HTTP 500 ao tentar POST /api/webhooks/payment"
       
-      **User Story:**
-      Como o sistema de e-commerce,
-      eu quero receber notificações de pagamento aprovado via webhook,
-      para que o status dos pedidos seja atualizado automaticamente após confirmação do pagamento.
+      User Story:
+      Como o sistema de e-commerce, eu quero receber notificações de pagamento aprovado via webhook, para que o status dos pedidos seja atualizado automaticamente após confirmação do pagamento.
       
       Critérios de Aceitação:
       - Dado que um pagamento é aprovado no gateway
@@ -149,9 +180,9 @@ messages:
       
       ---
       
-      ## EXEMPLO 3: Bug Complexo → User Story
+      EXEMPLO 3: Bug Complexo → User Story
       
-      **Bug Report:**
+      Bug Report:
       "Sistema de checkout com múltiplas falhas críticas.
       
       PROBLEMAS IDENTIFICADOS:
@@ -162,33 +193,23 @@ messages:
       
       IMPACTO: 150+ clientes afetados, perda de R$ 15.000"
       
-      **User Story:**
-      Como um cliente finalizando minha compra,
-      eu quero um processo de checkout seguro, confiável e com feedback claro,
-      para que eu possa completar minhas compras sem preocupações ou frustrações.
+      User Story:
+      Como um cliente finalizando minha compra, eu quero um processo de checkout seguro, confiável e com feedback claro, para que eu possa completar minhas compras sem preocupações ou frustrações.
       
       Critérios de Aceitação:
-      
-      **A. Segurança - Proteção contra XSS:**
       - Dado que estou inserindo um cupom de desconto
       - Quando digito qualquer texto (incluindo scripts)
       - Então o sistema deve sanitizar a entrada
       - E não deve executar scripts maliciosos
-      
-      **B. Integração - Processamento confiável:**
       - Dado que estou finalizando uma compra
       - Quando clico em "Finalizar Pagamento"
       - Então o sistema deve processar em até 30 segundos
       - E se ocorrer timeout, deve tentar novamente
       - E não deve cobrar o cliente múltiplas vezes
-      
-      **C. Lógica de Negócio - Controle atômico de cupons:**
       - Dado que um cupom tem limite de 100 usos
       - Quando múltiplos usuários tentam usar simultaneamente
       - Então o sistema deve garantir que apenas 100 usos sejam aceitos
       - E deve usar lock para prevenir race conditions
-      
-      **D. UX - Feedback claro:**
       - Dado que o pagamento está sendo processado
       - Quando o tempo ultrapassa 30 segundos
       - Então devo ver mensagem "Processando pagamento, aguarde..."
@@ -201,6 +222,14 @@ messages:
       - Sugestões: sanitização de input, retry pattern, transação SQL com lock
       
       ---
+      
+      # IMPORTANTE: ADAPTE O NÍVEL DE DETALHE
+      
+      - **Bug Simples** (1-2 problemas básicos): Use estrutura básica com 3-5 critérios diretos. NÃO adicione seções extras.
+      - **Bug Médio** (problema com contexto técnico): Adicione seção "Contexto Técnico" ao final.
+      - **Bug Complexo** (múltiplos problemas interconecidos): Use seções múltiplas apenas quando absolutamente necessário.
+      
+      **REGRA DE OURO**: Seja conciso e direto. Mais detalhes NÃO significa melhor qualidade.
       
       Agora, aplique este mesmo processo e padrão de qualidade ao bug report fornecido pelo usuário.
 

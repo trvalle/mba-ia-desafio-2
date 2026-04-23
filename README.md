@@ -2,6 +2,27 @@
 
 Sistema completo de otimização de prompts que realiza pull de prompts do LangSmith Prompt Hub, refatora usando técnicas avançadas de Prompt Engineering, e avalia através de 5 métricas customizadas.
 
+---
+
+> ## ⚠️ AÇÃO NECESSÁRIA - Feedback do Professor
+> 
+> **O projeto precisa ser completado com resultados reais da avaliação.**
+> 
+> 📖 **COMECE AQUI:** [LEIA_ME_PRIMEIRO.md](LEIA_ME_PRIMEIRO.md)
+> 
+> **Guias disponíveis:**
+> - 🚀 [LEIA_ME_PRIMEIRO.md](LEIA_ME_PRIMEIRO.md) - Fluxo rápido (1-2h para completar)
+> - 📋 [FEEDBACK_PROFESSOR.md](FEEDBACK_PROFESSOR.md) - Resumo do feedback e checklist
+> - 📚 [PASSOS_PARA_CONCLUSAO.md](PASSOS_PARA_CONCLUSAO.md) - Guia detalhado passo a passo
+> - 🔍 `python check_config.py` - Verificar configuração antes de começar
+> 
+> **O que falta:**
+> 1. Configurar credenciais reais no `.env`
+> 2. Executar avaliação e obter métricas >= 0.9
+> 3. Documentar resultados reais na seção [Resultados Finais](#resultados-finais)
+
+---
+
 ## 📋 Índice
 
 - [Visão Geral](#visão-geral)
@@ -144,23 +165,64 @@ Adicionei seção específica para casos especiais:
 
 ## 📊 Resultados Finais
 
+> ⚠️ **AÇÃO NECESSÁRIA:** Esta seção precisa ser completada com resultados reais da avaliação.
+> 
+> **Passos para completar:**
+> 1. Configure suas credenciais no arquivo `.env` (LangSmith API Key, OpenAI API Key, Username)
+> 2. Execute: `python src/push_prompts.py` para publicar o prompt v2 no LangSmith Hub
+> 3. Execute: `python src/evaluate.py` para avaliar o prompt e obter métricas reais
+> 4. Preencha o link do LangSmith e a tabela abaixo com os valores obtidos
+> 5. Itere o prompt v2 se necessário até todas as métricas >= 0.9
+> 
+> 📖 **Veja instruções detalhadas em:** [PASSOS_PARA_CONCLUSAO.md](PASSOS_PARA_CONCLUSAO.md)
+
 ### Dashboard LangSmith
 
-🔗 **Link público:** [Será adicionado após push do prompt]
+🔗 **Link público:** `[PREENCHER COM SEU LINK: https://smith.langchain.com/hub/{seu-username}/bug_to_user_story_v2]`
 
 ### Métricas de Aprovação
 
-> ⚠️ **Nota:** Execute `python src/evaluate.py` após configurar suas credenciais e fazer push do prompt v2 para obter os resultados reais.
+| Métrica | v1 (Baseline) | v2 (Otimizado) | Status | Melhoria |
+|---------|---------------|----------------|--------|----------|
+| Helpfulness | 0.45 | **[PREENCHER]** | ⏳ Pendente | [CALCULAR] |
+| Correctness | 0.52 | **[PREENCHER]** | ⏳ Pendente | [CALCULAR] |
+| F1-Score | 0.48 | **[PREENCHER]** | ⏳ Pendente | [CALCULAR] |
+| Clarity | 0.50 | **[PREENCHER]** | ⏳ Pendente | [CALCULAR] |
+| Precision | 0.46 | **[PREENCHER]** | ⏳ Pendente | [CALCULAR] |
+
+**Meta:** Todas as métricas ≥ 0.90 ⏳
+
+**Fórmula para Melhoria:** `((v2 - v1) / v1) * 100`
+
+### Exemplo de Como Deve Ficar (Após Avaliação)
+
+```markdown
+### Dashboard LangSmith
+
+🔗 **Link público:** https://smith.langchain.com/hub/seu-username/bug_to_user_story_v2
+
+### Métricas de Aprovação
 
 | Métrica | v1 (Baseline) | v2 (Otimizado) | Status | Melhoria |
 |---------|---------------|----------------|--------|----------|
-| Helpfulness | 0.45 | **?** | 🔄 Avaliar | - |
-| Correctness | 0.52 | **?** | 🔄 Avaliar | - |
-| F1-Score | 0.48 | **?** | 🔄 Avaliar | - |
-| Clarity | 0.50 | **?** | 🔄 Avaliar | - |
-| Precision | 0.46 | **?** | 🔄 Avaliar | - |
+| Helpfulness | 0.45 | **0.92** | ✅ Aprovado | +104% |
+| Correctness | 0.52 | **0.94** | ✅ Aprovado | +81% |
+| F1-Score | 0.48 | **0.91** | ✅ Aprovado | +90% |
+| Clarity | 0.50 | **0.93** | ✅ Aprovado | +86% |
+| Precision | 0.46 | **0.95** | ✅ Aprovado | +107% |
 
-**Meta:** Todas as métricas ≥ 0.90
+**Meta:** Todas as métricas ≥ 0.90 ✅
+
+### Análise dos Resultados
+
+O prompt v2 otimizado atingiu aprovação em todas as 5 métricas através da aplicação coordenada de:
+- **Few-shot Learning**: 3 exemplos cobrindo complexidades diferentes (simples, médio, complexo)
+- **Chain of Thought**: Processo estruturado em 5 passos para análise e transformação
+- **Role Prompting**: Persona de Product Manager Ágil com 10+ anos de experiência
+- **Tratamento de Edge Cases**: Instruções específicas para casos especiais
+
+A melhoria média foi de **+94%** em relação ao baseline v1, demonstrando a eficácia das técnicas aplicadas.
+```
 
 ---
 
@@ -197,14 +259,34 @@ pip install -r requirements.txt
 # Copie o template de variáveis de ambiente
 copy .env.example .env
 
-# Edite .env e configure:
-# - LANGSMITH_API_KEY=sua_chave_langsmith
-# - LANGSMITH_USERNAME=seu_username
-# - OPENAI_API_KEY=sua_chave_openai (OU GOOGLE_API_KEY)
-# - LANGSMITH_TRACING=true
+# Edite .env e configure suas credenciais reais:
 ```
 
-### 3. Pull do Prompt Baseline (v1)
+**Edite o arquivo `.env` e substitua os placeholders:**
+- `LANGSMITH_API_KEY` → Obtenha em https://smith.langchain.com/settings
+- `LANGSMITH_USERNAME` → Seu username do LangSmith Hub
+- `USERNAME_LANGSMITH_HUB` → Mesmo username acima
+- `OPENAI_API_KEY` → Obtenha em https://platform.openai.com/api-keys
+  - OU `GOOGLE_API_KEY` → Obtenha em https://aistudio.google.com/app/apikey
+
+**⚠️ IMPORTANTE:** Não deixe valores como "your_api_key_here" - use suas chaves reais!
+
+### 3. Verificação de Configuração ✨
+
+Antes de prosseguir, verifique se tudo está configurado corretamente:
+
+```bash
+python check_config.py
+```
+
+**Output esperado se tudo estiver OK:**
+```
+✅ TODAS AS VERIFICAÇÕES PASSARAM!
+```
+
+Se alguma verificação falhar, corrija o arquivo `.env` conforme indicado.
+
+### 4. Pull do Prompt Baseline (v1)
 
 ```bash
 # Baixa o prompt inicial do LangSmith Hub
@@ -217,14 +299,16 @@ python src/pull_prompts.py
 ✅ Prompt salvo em: prompts/bug_to_user_story_v1.yml
 ```
 
-### 4. Análise e Otimização
+### 5. Análise e Otimização
 
 O prompt v2 otimizado já está criado em `prompts/bug_to_user_story_v2.yml` com:
 - ✅ Few-shot Learning (3 exemplos)
 - ✅ Chain of Thought (processo de 5 passos)
 - ✅ Role Prompting (Product Manager Ágil)
 
-### 5. Push do Prompt Otimizado (v2)
+### 6. Push do Prompt Otimizado (v2) 🚀
+
+**⚠️ PASSO CRÍTICO:** Este comando publica seu prompt no LangSmith Hub. Anote o link gerado!
 
 ```bash
 # Publica o prompt v2 no LangSmith Hub (PÚBLICO)
@@ -237,14 +321,18 @@ python src/push_prompts.py
 🔗 Visualize em: https://smith.langchain.com/hub/{seu_username}/bug_to_user_story_v2
 ```
 
-### 6. Avaliação
+**📝 Anote o link acima** - você precisará adicioná-lo no README!
+
+### 7. Avaliação ⚡
+
+**⚠️ PASSO CRÍTICO:** Este comando gera as métricas que devem ir no README!
 
 ```bash
 # Avalia o prompt v2 com 15 exemplos
 python src/evaluate.py
 ```
 
-**Output esperado:**
+**Output esperado (quando todas as métricas >= 0.9):**
 ```
 ==================================================
 Prompt: {seu_username}/bug_to_user_story_v2
@@ -262,7 +350,40 @@ Métricas Base:
 ✅ STATUS: APROVADO - Todas as métricas >= 0.9
 ```
 
-### 7. Testes Automatizados
+**📝 Anote os valores das 5 métricas** - você precisará adicioná-los no README!
+
+### 8. Atualizar README com Resultados Reais 📋
+
+**⚠️ IMPORTANTE:** Este é o passo que o professor está esperando!
+
+Após obter todas as métricas >= 0.9, atualize a seção [Resultados Finais](#resultados-finais) deste README:
+
+1. **Substitua o link do LangSmith:**
+   ```markdown
+   🔗 **Link público:** https://smith.langchain.com/hub/{seu_username}/bug_to_user_story_v2
+   ```
+
+2. **Preencha a tabela com os valores obtidos:**
+   ```markdown
+   | Métrica | v1 (Baseline) | v2 (Otimizado) | Status | Melhoria |
+   |---------|---------------|----------------|--------|----------|
+   | Helpfulness | 0.45 | **0.94** | ✅ Aprovado | +109% |
+   | Correctness | 0.52 | **0.96** | ✅ Aprovado | +85% |
+   ...
+   ```
+
+3. **Calcule a Melhoria:** `((v2 - v1) / v1) * 100`
+
+4. **Veja o exemplo completo** na seção [Resultados Finais](#resultados-finais)
+
+5. **Commit e push para o GitHub:**
+   ```bash
+   git add README.md
+   git commit -m "docs: adicionar resultados finais da avaliação com métricas >= 0.9"
+   git push origin main
+   ```
+
+### 9. Testes Automatizados
 
 ```bash
 # Executa 6 testes de validação do prompt
@@ -281,7 +402,7 @@ tests/test_prompts.py::TestPrompts::test_minimum_techniques PASSED
 ============================== 6 passed ==============================
 ```
 
-### 8. Iteração (se necessário)
+### 10. Iteração (se necessário)
 
 Se alguma métrica estiver < 0.90:
 
